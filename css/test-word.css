@@ -1,0 +1,20 @@
+
+body {
+    padding:0;
+    margin: 0;
+}
+
+.word {
+    -webkit-animation: dot 2s infinite ;
+    overflow:hidden;
+    white-space:nowrap;
+    bottom: 50;
+    background: url(../imgs/changework.png);
+}
+@-webkit-keyframes dot {
+    0%{ width: 370px; height: 75px;}
+    25%{ width: 430px; height: 75px;}
+    50%{ width: 500px; height: 75px;}
+    75%{ width: 556px; height: 75px;}
+    100%{ width: 370px; height: 75px;}
+}

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+
+    <title>个人简历</title>
+
+    <!-- 载入所有的组件资源 -->
+    <script type="text/javascript" src="js/lib/jquery.js"></script>
+    <script type="text/javascript" src="js/lib/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.fullPage.js"></script>
+
+
+    <!-- H5对象：进行内容管理 -->
+
+    <script type="text/javascript" src="js/H5.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/H5.css" >
+
+    <script type="text/javascript" src="js/H5_loading.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/H5_loading.css" >
+
+    <!-- 页面逻辑的样式 -->
+    <style type="text/css">
+
+        body{
+            margin: 0;
+            padding: 0;
+        }
+
+        .h5_page{
+            background-image: url(imgs/page_bg.png);
+        }
+        .h5_page_face{
+            background-image: url(imgs/face_bg.png);
+        }
+        .h5_component_name_fight {
+            -webkit-animation:rock 2s infinite;
+        }
+        .h5_component_name_slogan{
+            -webkit-animation:rock 2s infinite;
+        }
+        @-webkit-keyframes rock{
+            0%{ transform:rotate(0deg)}
+            5%{ transform:rotate(3deg)}
+            10%{ transform:rotate(-4deg)}
+            15%{ transform:rotate(3deg)}
+            20%{ transform:rotate(-2deg)}
+            25%{ transform:rotate(1deg)}
+            30%{ transform:rotate(-1deg)}
+            70%{ transform:rotate(0deg)}
+            100%{ transform:rotate(0deg)}
+        }
+
+        .h5_component_name_caption{
+            background-image: url(imgs/page_caption_bg.png);
+            width: 283px;
+            height: 160px;
+            text-align: center;
+            line-height: 140px;
+            font-size: 20px;
+            color: #fff;
+        }
+        .h5_component_name_back{
+            top: 20px;
+            -webkit-animation:back 2s infinite 2s;
+        }
+
+        @-webkit-keyframes back{
+            50%{ top: 10px; }
+        }
+        /*.h5_component_name_changework {*/
+            /*-webkit-animation: dot 2s infinite ;*/
+            /*background-repeat: no-repeat;*/
+            /*overflow:hidden;*/
+            /*white-space:nowrap;*/
+            /*background-clip:border-box;*/
+        /*}*/
+        /*@-webkit-keyframes dot {*/
+            /*25%{ width: 185px; height: 38px;}*/
+            /*50%{ width: 215px; height: 38px;}*/
+            /*75%{ width: 250px; height: 38px;}*/
+            /*100%{ width: 278px; height: 38px;}*/
+        /*}*/
+    </style>
+
+    
+    <body>
+
+    <!--<div class="loading">-->
+
+        <!--<div class="double-bounce1"></div>-->
+        <!--<div class="double-bounce2"></div>-->
+
+        <!--<div id="rate">0%</div>-->
+
+    <!--</div>-->
+
+
+
+    <!-- 加载 H5组件 相关资源 -->
+    <script type="text/javascript">
+
+        var res = [
+            'Base','Bar','Bar_v','Point','Polyline',
+            'Radar','Pie','Ring'
+            ];
+        var html = [];
+        for(s in res){
+            html.push('<script type="text/javascript" src="js/H5Component'+res[s]+'.js"><\/script>');
+            html.push('<link rel="stylesheet" type="text/css" href="css/H5Component'+res[s]+'.css">');
+
+        }
+        document.write( html.join('') );
+    </script>
+    <!-- 主要逻辑 -->
+    <script type="text/javascript">
+
+        $(function  () {
+
+            var h5 = new H5();
+
+            h5.whenAddPage = function(){
+                this.addComponent('slide_up',{
+                    bg:'imgs/footer.png',
+                    css:{
+                        opacity:0,
+                        left:0,bottom:-20,
+                        width:'100%',height:'20px',zIndex:999
+                    },
+                    animateIn:{
+                        opacity:1,bottom:'-1px'
+                    },
+                    animateOut:{
+                        opacity:0,bottom:'-20px'
+                    },
+                    delay:500
+                });
+            }
+
+            h5
+            .addPage('face')
+                .addComponent('logo',{
+                    center:true,
+                    width:395,
+                    height:130,
+                    bg:'imgs/main-title.png',
+                    css:{opacity:0},
+                    animateIn:{top:100,opacity:1},
+                    animateOut:{top:0,opacity:0},
+                })
+                .addComponent('slogan',{
+                    center:true,
+                    width:365,
+                    height:99,
+                    bg:'imgs/slogan.png',
+                    css:{opacity:0,top:'33%'},
+                    animateIn:{left:'50%',opacity:1},
+                    animateOut:{left:'0%',opacity:0},
+                    delay:500
+                })
+                .addComponent('face_img_left',{
+                    width:370,
+                    height:493,
+                    bg:'imgs/face_img_left.png',
+                    css:{opacity:0,left:-50,bottom:-50},
+                    animateIn:{opacity:1,left:0,bottom:0},
+                    animateOut:{opacity:0,left:-50,bottom:-50},
+                    delay:1000
+                })
+                .addComponent('face_img_right',{
+                    width:276,
+                    height:449,
+                    bg:'imgs/face_img_right.png',
+                    css:{opacity:0,right:-50,bottom:-50},
+                    animateIn:{opacity:1,right:0,bottom:0},
+                    animateOut:{opacity:0,right:-50,bottom:-50},
+                    delay:1000
+                })
+            .addPage()
+                .addComponent('caption',{text:'个人简介'})
+                .addComponent('photo',{
+                    width:250,
+                    height:385,
+                    bg:'imgs/photo.png',
+                    css:{
+                        top:170,
+                        opacity:0,
+                        left: '5%',
+                        borderRadius:'5px'
+                    },
+                    animateIn:{opacity:1,left:'10%'},
+                    animateOut:{opacity:0,left:'5%'},
+                })
+                .addComponent('desc1',{
+                    height: 20,
+                    css: {
+                        left:'55%',
+                        opacity: 0,
+                        top: 170,
+                        lineHeight: '20px',
+                        fontSize: '16px',
+                        fontWeight: 900,
+                        fontFamily: 'microsoft Yahei'
+                    },
+                    animateIn:{opacity:1,left:'50%'},
+                    animateOut:{opacity:0,left:'55%'},
+                    delay:300,
+                    text:'姓名：陈林'
+                })
+                .addComponent('desc2',{
+                    height: 20,
+                    css: {
+                        left:'55%',
+                        opacity: 0,
+                        top: 200,
+                        lineHeight: '20px',
+                        fontSize: '16px',
+                        fontWeight: 900,
+                        fontFamily: 'microsoft Yahei'
+                    },
+                    animateIn:{opacity:1,left:'50%'},
+                    animateOut:{opacity:0,left:'55%'},
+                    delay:600,
+                    text:'出生日期：92.6.18'
+                })
+                .addComponent('desc3',{
+                    height: 20,
+                    css: {
+                        left:'55%',
+                        opacity: 0,
+                        top: 230,
+                        lineHeight: '20px',
+                        fontSize: '16px',
+                        fontWeight: 900,
+                        fontFamily: 'microsoft Yahei'
+                    },
+                    animateIn:{opacity:1,left:'50%'},
+                    animateOut:{opacity:0,left:'55%'},
+                    delay:900,
+                    text:'毕业院校：上海大学'
+                })
+                .addComponent('desc4',{
+                    height: 20,
+                    css: {
+                        left:'55%',
+                        opacity: 0,
+                        top: 260,
+                        lineHeight: '20px',
+                        fontSize: '16px',
+                        fontWeight: 900,
+                        fontFamily: 'microsoft Yahei'
+                    },
+                    animateIn:{opacity:1,left:'50%'},
+                    animateOut:{opacity:0,left:'55%'},
+                    delay:1200,
+                    text:'学历：本科'
+                })
+                .addComponent('desc5',{
+                    height: 20,
+                    css: {
+                        left:'55%',
+                        opacity: 0,
+                        top: 290,
+                        lineHeight: '20px',
+                        fontSize: '16px',
+                        fontWeight: 900,
+                        fontFamily: 'microsoft Yahei'
+                    },
+                    animateIn:{opacity:1,left:'50%'},
+                    animateOut:{opacity:0,left:'55%'},
+                    delay:1500,
+                    text:'电话：18817392379'
+                })
+                .addComponent('desc6',{
+                    height: 20,
+                    css: {
+                        left:'55%',
+                        opacity: 0,
+                        top: 320,
+                        lineHeight: '20px',
+                        fontSize: '16px',
+                        fontWeight: 900,
+                        fontFamily: 'microsoft Yahei'
+                    },
+                    animateIn:{opacity:1,left:'50%'},
+                    animateOut:{opacity:0,left:'55%'},
+                    delay:1800,
+                    text:'兴趣：音乐 前端'
+                })
+                .addComponent('desc7',{
+                    height: 20,
+                    css: {
+                        left:'55%',
+                        opacity: 0,
+                        top: 350,
+                        lineHeight: '20px',
+                        fontSize: '16px',
+                        fontWeight: 900,
+                        fontFamily: 'microsoft Yahei'
+                    },
+                    animateIn:{opacity:1,left:'50%'},
+                    animateOut:{opacity:0,left:'55%'},
+                    delay:2100,
+                    text:'求职意向：初级前端'
+                })
+                .addComponent('changework',{
+                    width: 370,
+                    height:75,
+                    bg:'imgs/changework.png',
+                    center:true,
+
+                    css:{
+                        opacity: 0,
+                        bottom: '15%',
+                    },
+                    animateIn:{opacity:1,bottom:'20%'},
+                    animateOut:{opacity:0,bottom:'15%'},
+                    delay:3000,
+
+                })
+            .addPage() //bar
+                .addComponent('caption',{text:'前端技能'})
+                .addComponent('bar',
+                {
+                    type : 'bar',
+
+                    width : 530,
+                    height : 600,
+                    data:[
+                        ['Javascript' , .5  ,'#ff7676'],
+                        ['HTML/CSS' , .6  ],
+                        ['CSS3' , .2 ],
+                        ['HTML5' , .3  ],
+                        ['jQuery' , .5 ],
+                        ['Ajax' , .3 ],
+                        ['Vue' , .1  ]
+                    ],
+                    css : {
+                        top:100,
+                        opacity:0
+                    },
+                    animateIn:{
+                        opacity:1,
+                        top:200,
+                    },
+                    animateOut:{
+                        opacity:0,
+                        top:100,
+                    },
+                    center : true,
+                }
+        )
+                .addComponent('fight',{
+                    width:320,
+                    height:178,
+                    bg:'imgs/fight.png',
+                    center:true,
+                    css:{
+                        bottom:'15%',
+                        opacity:0,
+                        borderRadius:'5px'
+                    },
+                    animateIn:{opacity:1,bottom:'20%'},
+                    animateOut:{opacity:0,bottom:'15%'},
+                    delay:2300
+                })
+            .addPage() //（bar_v）
+                .addComponent('caption',{text:'学习欲望清单'})
+                .addComponent('bar',
+                {
+                    type : 'bar_v',
+                    width : 530,
+                    height : 400,
+                    data:[
+                        ['Vue.js' , .8  ,'#ff7676'],
+                        ['webpack' , .6 ],
+                        ['BootStrap' , .5  ],
+                        ['Node.js' , .3  ],
+                        ['数据结构/算法' , .5 ]
+                    ],
+                    css : {
+                        top:220,
+                        opacity:0
+                    },
+                    animateIn:{
+                        opacity:1,
+                        top:200,
+                    },
+                    animateOut:{
+                        opacity:0,
+                        top:220,
+                    },
+                    center : true
+                }
+        )
+                .addComponent('msg',{
+                    text:'未来两年内主要学习目标',
+                    css:{
+                        opacity:0,top:180,
+                        textAlign:'center',width:'100%',color:'#ff7676',fontWeight:900
+                    },
+                    animateIn:{ opacity:1},
+                    animateOut:{ opacity:0}
+                })
+
+            .addPage()
+                .addComponent('caption',{text:'JS技能'})//radar
+
+                .addComponent('radar',{
+                    type : 'radar',
+                    width : 400,
+                    height : 400,
+                    data:[
+                        ['基础知识' , .7  ,'#ff7676'],
+                        ['框架' , .2 ],
+                        ['jQuery' , .6  ],
+                        ['工程化' , .3  ],
+                        ['Ajax' , .5 ]
+                    ],
+                    css : {
+                        top:100,
+                        opacity:0
+                    },
+                    animateIn:{
+                        opacity:1,
+                        top:200,
+                    },
+                    animateOut:{
+                        opacity:0,
+                        top:100,
+                    },
+                    center : true,
+                })
+
+            .addPage()
+                .addComponent('caption',{text:'自我评价'})//ring
+                .addComponent('ring-all',{
+                    type : 'ring',center : true,
+                    width : 300,height : 300,
+                    data:[['整体评价' , .7  ,'#ff7676']],
+                    css : { top:'30%',opacity:0 ,fontSize:'60px',fontWeight:900,fontFamily:'microsoft Yahei'},
+                    animateIn: { opacity:1},
+                    animateOut:{ opacity:0},
+                })
+//               .addComponent('msg',{
+//                    text:'',
+//                    css:{
+//                        opacity:0,top:300,
+//                        textAlign:'center',width:'100%',color:'#ff7676'
+//                    },
+//                    animateIn:{ opacity:1},
+//                    animateOut:{ opacity:0},
+//                    delay:1800,
+//                })
+                .addComponent('ring-1',{
+                    type : 'ring',center : true,
+                    width : 140,height : 140,
+                    data:[['探索欲' , .9  ,'darkorange']],
+                    css : { left:30,bottom:110,opacity:0,fontSize:'12px' },
+                    animateIn: { opacity:1},
+                    animateOut:{ opacity:0},
+                })
+                .addComponent('ring-2',{
+                    type : 'ring',
+                    width : 140,height : 140,
+                    data:[['天赋' , .6  ,'darkorange']],
+                    css : { left:30,bottom:110,opacity:0,fontSize:'12px' },
+                    animateIn: { opacity:1},
+                    animateOut:{ opacity:0},
+                })
+                .addComponent('ring-3',{
+                    type : 'ring',
+                    width : 140,height : 140,
+                    data:[['经验' , .2  ,'darkorange']],
+                    css : { right:30,bottom:110,opacity:0,fontSize:'12px' },
+                    animateIn: { opacity:1},
+                    animateOut:{ opacity:0},
+                })
+                .addComponent('ring-3',{
+                    type : 'ring',
+                    width : 140,height : 140,
+                    data:[['努力' , .5  ,'darkorange']],
+                    css : { left:70,bottom:40,opacity:0,fontSize:'12px' },
+                    animateIn: { opacity:1},
+                    animateOut:{ opacity:0},
+                })
+                .addComponent('ring-3',{
+                    type : 'ring',
+                    width : 140,height : 140,
+                    data:[['恒心' , .5  ,'darkorange']],
+                    css : { right:70,bottom:40,opacity:0,fontSize:'12px' },
+                    animateIn: { opacity:1},
+                    animateOut:{ opacity:0},
+                })
+
+          .addPage()
+                .addComponent('caption',{text:'联系方式'})//point
+                .addComponent('point',{
+                type : 'point',
+                width : 300,
+                height : 300,
+                data:[
+                    ['电话' , .5,'18817392379'  ,'#ff7676'],
+                    ['QQ' , .4  ,'243519473','#ffa3a4', '-30%' ,'-100%'],
+                    ['WeChat' , .5  ,'sunny_chen618','#99c1ff', '50%' ,'-160%']
+                ],
+                css : {
+                    bottom:'20%'
+                },
+                center : true,
+            })
+
+
+                .addComponent('slogan',{
+                    center:true,
+                    width:314,
+                    height:46,
+                    bg:'imgs/endding.png',
+                    css:{bottom:'10%',opacity:0},
+                    animateIn:{opacity:1,left:'50%'},
+                    animateOut:{opacity:0,left:'0%'},
+                    delay:500
+                })
+
+                .addComponent('back',{
+                    width:52,
+                    height:50,
+                    bg:'imgs/tail_back.png',
+                    center:true,
+                    onclick : function(){
+                         $.fn.fullpage.moveTo( 1 )
+                    }
+                })
+
+            .loader( [ 'imgs/tail_back.png','imgs/tail_share.png','imgs/tail_slogan.png' ] );
+
+        });
+    </script>
+
+    </body>
+
+</html>
